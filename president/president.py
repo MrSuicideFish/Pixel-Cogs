@@ -60,7 +60,7 @@ class president:
 
 	#COG DEFINITIONS, DO NOT CHANGE ME
 	def presidentclear(self, settings):
-		dataIO.save_json(self.file_path, self.system)
+	    dataIO.save_json(self.file_path, self.system)
 
 	#Checks the server for specific settings
 	#if the settings don't exist, create them
