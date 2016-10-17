@@ -60,8 +60,26 @@ class president:
 #COMMANDS END HERE
 
 #COG DEFINITIONS, DO NOT CHANGE ME
+def check_folders():
+    if not os.path.exists("data/president"):
+        print("Creating president folder...")
+        os.makedirs("data/president")
+
+
+def check_files():
+    default = {"Servers": {}
+               }
+
+    f = "data/president/system.json"
+    if not dataIO.is_valid_json(f):
+        print("Making president .json...")
+        dataIO.save_json(f, default)
+
 def setup(bot):
-    bot.add_cog(president(bot))
+    check_folders()
+    check_files()
+    n = president(bot)
+    bot.add_cog(n)
 
 def presidentclear(self, settings):
     dataIO.save_json(self.file_path, self.system)
