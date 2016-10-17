@@ -54,7 +54,6 @@ class president:
     async def _reset_president(self,ctx):
         server = ctx.message.server
         settings = self.check_server_settings(server)
-        self.
         await self.bot.say("President has been reset.")
 
 #COMMANDS END HERE
