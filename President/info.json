@@ -3,6 +3,6 @@
     "SHORT" : "Run for president of your discord server.",
     "DESCRIPTION" : "Allows users to run for president by nominating themselves, or others. Presidents get a fixed salary over time. But be careful, there are others out ot assasinate you and take control.",
     "DISABLED" : false,
-    "NAME" : "President",
+    "NAME" : "president",
     "INSTALL_MSG" : "`[p]president is a work-in-progress, use at your own risk."
 }
