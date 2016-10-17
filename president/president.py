@@ -15,7 +15,4 @@ class president:
         await self.bot.say("I can do stuff!")
 
 def setup(bot):
-    check_folders()
-    check_files()
-    n = president(bot)
-    bot.add_cog(n)
+    bot.add_cog(president(bot))
