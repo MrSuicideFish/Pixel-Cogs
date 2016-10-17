@@ -28,6 +28,13 @@ class president:
 
 #COMMANDS START HERE
 
+    #define the president command
+    commands.group(pass_context=True,no_pm=True)
+    async def president(self, ctx):
+        """"General president related commands""""
+        if ctx.invoked_subcommand is None:
+            await send_cmd_help(ctx)
+
     #--Create the 'nominate' command
     #we write pass_context so that discord will send us info about the server that we can use
     @president.command( name="nominate", pass_context=True )
@@ -44,9 +51,16 @@ class president:
     @president.command(name="reset", pass_context=True)
     @checks.admin_or_permissions(manage_server=True)
     async def _reset_president(self,ctx):
+        server = ctx.message.server
+        settings = self.check_server_settings(server)
+        self.
         await self.bot.say("President has been reset.")
 
 #COMMANDS END HERE
 
+#COG DEFINITIONS, DO NOT CHANGE ME
 def setup(bot):
     bot.add_cog(president(bot))
+
+def (self, settings):
+    dataIO.save_json(self.file_path, self.system)
