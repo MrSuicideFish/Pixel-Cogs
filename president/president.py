@@ -84,8 +84,7 @@ def check_server_settings(self,server):
 											"Election Underway" : "No",
 											"Cooldown"          : False, 
 											"Time Remaining"    : 0,
-											"Default Cooldown"  : 0 }
-                                            }
+											"Default Cooldown"  : 0 }}
         dataIO.save_json(self.file_path, self.system)
         print("Creating default config for President on server: {}".format(server.name))
         path = self.system["Servers"][server.id]
