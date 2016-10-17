@@ -54,6 +54,7 @@ class president:
     async def _reset_president(self,ctx):
         server = ctx.message.server
         settings = self.check_server_settings(server)
+        self.presidentclear(settings)
         await self.bot.say("President has been reset.")
 
 #COMMANDS END HERE
@@ -62,5 +63,5 @@ class president:
 def setup(bot):
     bot.add_cog(president(bot))
 
-def (self, settings):
+def presidentclear(self, settings):
     dataIO.save_json(self.file_path, self.system)
