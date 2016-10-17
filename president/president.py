@@ -30,7 +30,7 @@ class president:
 
     #--define the president command
     @commands.group(pass_context=True, no_pm=True)
-    async def president(self, ctx):
+    async def president(self,ctx):
         """General president related commands"""
 
         if ctx.invoked_subcommand is None:
@@ -39,7 +39,7 @@ class president:
     #--Create the 'nominate' command
     #we write pass_context so that discord will send us info about the server that we can use
     @president.command( name="nominate", pass_context=True )
-    async def _nominate_president(self, ctx):
+    async def _nominate_president(self,ctx):
         user = ctx.message.author
         server = ctx.message.server
         settings = self.check_server_settings(server)
@@ -50,7 +50,7 @@ class president:
     #DEBUGGING
     @president.command(name="reset", pass_context=True)
     @checks.admin_or_permissions(manage_server=True)
-    async def _reset_president(self,ctx):
+    async def _reset_president(self, ctx):
         server = ctx.message.server
         settings = self.check_server_settings(server)
         self.presidentclear(settings)
