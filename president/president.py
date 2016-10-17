@@ -29,7 +29,7 @@ class president:
 #COMMANDS START HERE
 
     #define the president command
-    commands.group(pass_context=True,no_pm=True)
+    @commands.group(pass_context=True,no_pm=True)
     async def president(self, ctx):
         """"General president related commands""""
         if ctx.invoked_subcommand is None:
