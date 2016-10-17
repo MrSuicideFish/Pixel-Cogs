@@ -31,7 +31,7 @@ class president:
     #--define the president command
     @commands.group(pass_context=True, no_pm=True)
     async def president(self, ctx):
-        """General heist related commands"""
+        """General president related commands"""
 
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
@@ -39,7 +39,7 @@ class president:
     #--Create the 'nominate' command
     #we write pass_context so that discord will send us info about the server that we can use
     @president.command( name="nominate", pass_context=True )
-    async def _nominate_president(self):
+    async def _nominate_president(self, ctx):
         user = ctx.message.author
         server = ctx.message.server
         settings = self.check_server_settings(server)
