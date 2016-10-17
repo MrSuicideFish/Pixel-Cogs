@@ -56,32 +56,29 @@ class president:
         settings = self.check_server_settings(server)
         self.presidentclear(settings)
         await self.bot.say("President has been reset.")
+        
+    # COMMANDS END HERE
 
-        # COMMANDS END HERE
+    # COG DEFINITIONS, DO NOT CHANGE ME
+    def presidentclear(self, settings):
+    	dataIO.save_json(self.file_path, self.system)
 
-        # COG DEFINITIONS, DO NOT CHANGE ME
-        def presidentclear(self, settings):
-        	dataIO.save_json(self.file_path, self.system)
-
-        # Checks the server for specific settings
-        # if the settings don't exist, create them
-        def check_server_settings(self, server):
-            if server.id not in self.system["Servers"]:
-                self.system["Servers"][server.id] = {"President": {},
-                                                     "Config": {"Current President": "None",
-                                                                "Election Underway": "No",
-                                                                "Cooldown": False,
-                                                                "Time Remaining": 0,
-                                                                "Default Cooldown": 0
-                                                                },
-                                                     }
-                dataIO.save_json(self.file_path, self.system)
-                print("Creating default config for President on server: {}".format(server.name))
-                path = self.system["Servers"][server.id]
-                return path
-            else:
-                path = self.system["Servers"][server.id]
-                return path
+    # Checks the server for specific settings
+    # if the settings don't exist, create them
+    def check_server_settings(self, server):
+        if server.id not in self.system["Servers"]:
+            self.system["Servers"][server.id] = {"President": {},
+                                                 "Config": {"Current President": "None", "Election Underway": "No",
+                                                            "Cooldown": False, "Time Remaining": 0,
+                                                            "Default Cooldown": 0},
+                                                 }
+            dataIO.save_json(self.file_path, self.system)
+            print("Creating default config for President on server: {}".format(server.name))
+            path = self.system["Servers"][server.id]
+            return path
+        else:
+            path = self.system["Servers"][server.id]
+            return path
 
 
 def check_folders():
