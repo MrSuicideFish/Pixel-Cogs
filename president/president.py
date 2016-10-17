@@ -64,21 +64,13 @@ def check_folders():
         print("Creating president folder...")
         os.makedirs("data/president")
 
-
 def check_files():
     default = {"Servers": {}
                }
-
     f = "data/president/system.json"
     if not dataIO.is_valid_json(f):
         print("Making president .json...")
         dataIO.save_json(f, default)
-
-def setup(bot):
-    check_folders()
-    check_files()
-    n = president(bot)
-    bot.add_cog(n)
 
 def presidentclear(self, settings):
     dataIO.save_json(self.file_path, self.system)
@@ -102,3 +94,9 @@ def check_server_settings(self,server):
     else:
         path = self.system["Servers"][server.id]
         return path
+
+def setup(bot):
+    check_folders()
+    check_files()
+    n = president(bot)
+    bot.add_cog(n)
