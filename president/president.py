@@ -1,6 +1,6 @@
-#  Bankheist.py was created by Redjumpman for Redbot
+#  President.py was created by MrSuicide
 #  This will create a system.JSON file and a data folder
-#  This will modify values your bank.json from economy.py
+#  This will modify values your government.py
 import os
 import asyncio
 import random
