@@ -43,7 +43,6 @@ class president:
         user = ctx.message.author
         server = ctx.message.server
         settings = self.check_server_settings(server)
-
         #output a message from the bot
         await self.bot.say("I can do stuff!")
 
