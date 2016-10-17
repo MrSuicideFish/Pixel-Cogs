@@ -1,5 +1,7 @@
 # Pixel-Cogs
 Medium-to-Large server cogs for discord. Home of the legendary President cog.
+Current Cogs:
+  President (Work-In-Progress)
 
 # Contact
 I'm usually on discord at least 12 hours a day (unless its a US holiday).
