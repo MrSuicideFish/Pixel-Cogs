@@ -64,11 +64,7 @@ def presidentclear(self, settings):
 
 def check_server_settings(self, server):
     if server.id not in self.system["Servers"]:
-        self.system["Servers"][server.id] = {"President": {},
-                                             "Config": {"Current President": "None", "Election Underway": "No",
-                                                        "Cooldown": False, "Time Remaining": 0,
-                                                        "Default Cooldown": 0}
-                                             }
+        self.system["Servers"][server.id] = {"President": {}}
         dataIO.save_json(self.file_path, self.system)
         print("Creating default config for President on server: {}".format(server.name))
         path = self.system["Servers"][server.id]
