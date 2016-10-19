@@ -88,8 +88,9 @@ class president:
             print("Making president .json...")
             dataIO.save_json(f, default)
 
-    def setup(bot):
-        check_folders()
-        check_files()
-        n = president(bot)
-        bot.add_cog(n)
+
+def setup(bot):
+    check_folders()
+    check_files()
+    n = president(bot)
+    bot.add_cog(n)
