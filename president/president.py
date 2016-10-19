@@ -73,14 +73,12 @@ def check_server_settings(self, server):
 
 def check_folders():
     if not os.path.exists("data/president"):
-        11
         print("Creating president folder...")
         os.makedirs("data/president")
 
 
 def check_files():
-    default = {"Servers": {}
-               }
+    default = {"Servers": {}}
     f = "data/president/system.json"
     if not dataIO.is_valid_json(f):
         print("Making president .json...")
