@@ -57,6 +57,8 @@ class president:
         self.presidentclear(settings)
         await self.bot.say("President has been reset.")
 
+    #--INTERNAL ATTR DEFINITIONS
+
     def presidentclear(self, settings):
         dataIO.save_json(self.file_path, self.system)
 
@@ -76,17 +78,21 @@ class president:
             path = self.system["Servers"][server.id]
             return path
 
-    def check_folders():
-        if not os.path.exists("data/president"):
-            print("Creating president folder...")
-            os.makedirs("data/president")
+#--EXTERNAL ATTR DEFINITIONS
 
-    def check_files():
-        default = {"Servers": {}}
-        f = "data/president/system.json"
-        if not dataIO.is_valid_json(f):
-            print("Making president .json...")
-            dataIO.save_json(f, default)
+
+def check_folders():
+    if not os.path.exists("data/president"):
+        print("Creating president folder...")
+        os.makedirs("data/president")
+
+
+def check_files():
+    default = {"Servers": {}}
+    f = "data/president/system.json"
+    if not dataIO.is_valid_json(f):
+        print("Making president .json...")
+        dataIO.save_json(f, default)
 
 
 def setup(bot):
