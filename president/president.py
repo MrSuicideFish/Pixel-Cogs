@@ -49,7 +49,7 @@ class president:
         settings = self.check_server_settings(server)
 
         # Check to be sure the nominated user even exists in the server
-        nominatedUser = str(server.get_member_named(player).nick)
+        nominatedUser = server.get_member_named(player).nick
 
         if settings["Config"]["Election Started"] == "No":
             await self.bot.say("Election Has Been Started, {0} has nominated {1}!".format(user.name, nominatedUser))
