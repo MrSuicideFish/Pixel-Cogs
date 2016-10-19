@@ -57,36 +57,39 @@ class president:
         self.presidentclear(settings)
         await self.bot.say("President has been reset.")
 
+    def presidentclear(self, settings):
+        dataIO.save_json(self.file_path, self.system)
 
-def presidentclear(self, settings):
-    dataIO.save_json(self.file_path, self.system)
+    def check_server_settings(self, server):
+        if server.id not in self.system["Servers"]:
+            self.system["Servers"][server.id] = {"President": {},
+                                                 "Config": {"Election Started": "No",
+                                                            "Cooldown": False, "Time Remaining": 0, "Default CD": 0,
+                                                            "Bankheist Running": "No", "Players": 0,
+                                                            "Wait Time": 120},
+                                                 }
+            dataIO.save_json(self.file_path, self.system)
+            print("Creating default heist settings for Server: {}".format(server.name))
+            path = self.system["Servers"][server.id]
+            return path
+        else:
+            path = self.system["Servers"][server.id]
+            return path
 
+    def check_folders():
+        if not os.path.exists("data/president"):
+            print("Creating president folder...")
+            os.makedirs("data/president")
 
-def check_server_settings(self, server):
-    if server.id not in self.system["Servers"]:
-        path = self.system["Servers"][server.id]
-        return path
-    else:
-        path = self.system["Servers"][server.id]
-        return path
+    def check_files():
+        default = {"Servers": {}}
+        f = "data/president/system.json"
+        if not dataIO.is_valid_json(f):
+            print("Making president .json...")
+            dataIO.save_json(f, default)
 
-
-def check_folders():
-    if not os.path.exists("data/president"):
-        print("Creating president folder...")
-        os.makedirs("data/president")
-
-
-def check_files():
-    default = {"Servers": {}}
-    f = "data/president/system.json"
-    if not dataIO.is_valid_json(f):
-        print("Making president .json...")
-        dataIO.save_json(f, default)
-
-
-def setup(bot):
-    check_folders()
-    check_files()
-    n = president(bot)
-    bot.add_cog(n)
+    def setup(bot):
+        check_folders()
+        check_files()
+        n = president(bot)
+        bot.add_cog(n)
