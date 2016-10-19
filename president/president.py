@@ -50,10 +50,14 @@ class president:
 
         # Check to be sure the nominated user even exists in the server
         if len(ctx.message.mentions) > 0:
-            nominatedUser = ctx.message.mentions[0].nick
             for mens in ctx.message.mentions:
                 if settings["Config"]["Election Started"] == "No":
-                    await self.bot.say("Election Has Been Started, {0} has nominated {1}!".format(user.nick, nominatedUser))
+                    settings["Config"]["Election Started"] = "Yes"
+                    mentionedUser = server.get_member_named(mens.nick)
+                    if mentionedUser is not None:
+                        candidates_add(
+                            mentionedUser, mentionedUser.id, mentionedUser.name, settings)
+                        await self.bot.say("Election Has Been Started, {0} has nominated {1}!".format(user.nick, mens.nick))
                 else:
                     await self.bot.say("{0} has nominated {1}!".format(user, player))
 
@@ -68,6 +72,11 @@ class president:
         await self.bot.say("President has been reset.")
 
     #--INTERNAL ATTR DEFINITIONS
+
+    def candidates_add(self, uid, name, settings):
+        settings["Candidates"][uid] = {"Name": name, "User ID": uid}
+        settings["Config"]["Candidates"] = settings["Config"]["Candidates"] + 1
+        dataIO.save_json(self.file_path, self.system)
 
     def presidentclear(self, settings):
         dataIO.save_json(self.file_path, self.system)
