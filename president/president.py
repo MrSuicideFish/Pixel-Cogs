@@ -49,15 +49,15 @@ class president:
         settings = self.check_server_settings(server)
 
         # Check to be sure the nominated user even exists in the server
-        for mens in ctx.message.mentions:
-            await self.bot.say("President has been reset.")
+        if len(ctx.message.mentions) > 0:
+            nominatedUser = ctx.message.mentions[0].nick
+            for mens in ctx.message.mentions:
+                if settings["Config"]["Election Started"] == "No":
+                    await self.bot.say("Election Has Been Started, {0} has nominated {1}!".format(user.nick, nominatedUser))
+                else:
+                    await self.bot.say("{0} has nominated {1}!".format(user, player))
 
-        # if settings["Config"]["Election Started"] == "No":
-        #     await self.bot.say("Election Has Been Started, {0} has nominated {1}!".format(user.nick, nominatedUser))
-        # else:
-        #     await self.bot.say("{0} has nominated {1}!".format(user, player))
-
-    # DEBUGGING
+                # DEBUGGING
     @president.command(name="reset", pass_context=True)
     @checks.admin_or_permissions(manage_server=True)
     async def _reset_president(self, ctx):
