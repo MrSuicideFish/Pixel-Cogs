@@ -41,17 +41,23 @@ class president:
     # we write pass_context so that discord will send us info about the server
     # that we can use
     @president.command(name="nominate", pass_context=True)
-    async def _nominate_president(self, ctx):
+    async def _nominate_president(self, ctx, player: str):
+        """Nominate a president for the server"""
+
         user = ctx.message.author
         server = ctx.message.server
         settings = self.check_server_settings(server)
-        # output a message from the bot
-        await self.bot.say("I can do stuff!")
+
+        if settings["Config"]["Election Started"] == "No"
+            await self.bot.say("Election Has Been Started, {0} has nominated {1}!".format(user, player))
+        else
+            await self.bot.say("{0} has nominated {1}!".format(user, player))
 
     # DEBUGGING
     @president.command(name="reset", pass_context=True)
     @checks.admin_or_permissions(manage_server=True)
     async def _reset_president(self, ctx):
+        """Resets president and settings to normal"""
         server = ctx.message.server
         settings = self.check_server_settings(server)
         self.presidentclear(settings)
@@ -65,6 +71,7 @@ class president:
     def check_server_settings(self, server):
         if server.id not in self.system["Servers"]:
             self.system["Servers"][server.id] = {"President": {},
+                                                 "Candidates": {},
                                                  "Config": {"Election Started": "No",
                                                             "Cooldown": False, "Time Remaining": 0, "Default CD": 0,
                                                             "Bankheist Running": "No", "Players": 0,
