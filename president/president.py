@@ -50,7 +50,7 @@ class president:
 
         if settings["Config"]["Election Started"] == "No":
             await self.bot.say("Election Has Been Started, {0} has nominated {1}!".format(user, player))
-        else
+        else:
             await self.bot.say("{0} has nominated {1}!".format(user, player))
 
     # DEBUGGING
