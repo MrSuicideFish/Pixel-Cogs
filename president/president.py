@@ -40,8 +40,8 @@ class president:
     #--Create the 'nominate' command
     # we write pass_context so that discord will send us info about the server
     # that we can use
-    @president.command(name="nominate", pass_context=True)
-    async def _nominate_president(self, ctx, player: str):
+    @president.command(name="nominate", pass_context=True, mentions=True)
+    async def _nominate_president(self, ctx, nominatedUser: discord.user=None):
         """Nominate a president for the server"""
 
         user = ctx.message.author
@@ -49,10 +49,9 @@ class president:
         settings = self.check_server_settings(server)
 
         # Check to be sure the nominated user even exists in the server
-        nominatedUser = server.get_member_named(player).nick
 
         if settings["Config"]["Election Started"] == "No":
-            await self.bot.say("Election Has Been Started, {0} has nominated {1}!".format(user.name, nominatedUser))
+            await self.bot.say("Election Has Been Started, {0} has nominated {1}!".format(user.nick, nominatedUser))
         else:
             await self.bot.say("{0} has nominated {1}!".format(user, player))
 
