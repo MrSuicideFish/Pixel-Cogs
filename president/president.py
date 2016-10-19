@@ -49,7 +49,7 @@ class president:
         settings = self.check_server_settings(server)
 
         # Check to be sure the nominated user even exists in the server
-        for mens in ctx.mentions:
+        for mens in ctx.message.mentions:
             await self.bot.say("President has been reset.")
 
         # if settings["Config"]["Election Started"] == "No":
