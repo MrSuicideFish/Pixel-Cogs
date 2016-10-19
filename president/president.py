@@ -74,8 +74,7 @@ class president:
                                                  "Candidates": {},
                                                  "Config": {"Election Started": "No",
                                                             "Cooldown": False, "Time Remaining": 0, "Default CD": 0,
-                                                            "Bankheist Running": "No", "Players": 0,
-                                                            "Wait Time": 120},
+                                                            "Candidates": 0, "Wait Time": 120},
                                                  }
             dataIO.save_json(self.file_path, self.system)
             print("Creating default heist settings for Server: {}".format(server.name))
