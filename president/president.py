@@ -57,7 +57,7 @@ class president:
 
                 mentionedUser = server.get_member_named(mens.nick)
                 if mentionedUser is not None:
-                    candidates_add(
+                    self.candidates_add(
                         mentionedUser, mentionedUser.id, mentionedUser.name, settings)
                     await self.bot.say("Election Has Been Started, {0} has nominated {1}!".format(user.nick, mentionedUser.name))
 
