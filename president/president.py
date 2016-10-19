@@ -53,13 +53,13 @@ class president:
             for mens in ctx.message.mentions:
                 if settings["Config"]["Election Started"] == "No":
                     settings["Config"]["Election Started"] = "Yes"
-                    mentionedUser = server.get_member_named(mens.nick)
-                    if mentionedUser is not None:
-                        candidates_add(
-                            mentionedUser, mentionedUser.id, mentionedUser.name, settings)
-                        await self.bot.say("Election Has Been Started, {0} has nominated {1}!".format(user.nick, mens.nick))
-                else:
-                    await self.bot.say("{0} has nominated {1}!".format(user, player))
+                    await self.bot.say("Election Has Been Started!")
+
+                mentionedUser = server.get_member_named(mens.nick)
+                if mentionedUser is not None:
+                    candidates_add(
+                        mentionedUser, mentionedUser.id, mentionedUser.name, settings)
+                    await self.bot.say("Election Has Been Started, {0} has nominated {1}!".format(user.nick, mentionedUser.name))
 
                 # DEBUGGING
     @president.command(name="reset", pass_context=True)
