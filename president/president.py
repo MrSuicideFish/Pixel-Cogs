@@ -64,8 +64,6 @@ def presidentclear(self, settings):
 
 def check_server_settings(self, server):
     if server.id not in self.system["Servers"]:
-        self.system["Servers"][server.id] = {"President": {}}
-        dataIO.save_json(self.file_path, self.system)
         path = self.system["Servers"][server.id]
         return path
     else:
