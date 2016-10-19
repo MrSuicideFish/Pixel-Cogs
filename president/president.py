@@ -48,7 +48,7 @@ class president:
         server = ctx.message.server
         settings = self.check_server_settings(server)
 
-        if settings["Config"]["Election Started"] == "No"
+        if settings["Config"]["Election Started"] == "No":
             await self.bot.say("Election Has Been Started, {0} has nominated {1}!".format(user, player))
         else
             await self.bot.say("{0} has nominated {1}!".format(user, player))
