@@ -5,6 +5,7 @@ import os
 import asyncio
 import random
 import time
+import discord
 from operator import itemgetter
 from discord.ext import commands
 from .utils.dataIO import dataIO
@@ -47,6 +48,8 @@ class president:
         user = ctx.message.author
         server = ctx.message.server
         settings = self.check_server_settings(server)
+
+        await self.bot.say(settings);
 
         # Check to be sure the nominated user even exists in the server
         # if len(ctx.message.mentions) > 0:
