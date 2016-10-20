@@ -74,7 +74,7 @@ class president:
 
     def candidates_add(self, uid, name, settings):
         settings["Candidates"][uid] = {"Name": name, "User ID": uid}
-        settings["Config"]["Candidates"] = settings["Config"]["Candidates"] + 1
+        settings["Config"]["NumOfCandidates"] = settings["Config"]["Candidates"] + 1
         dataIO.save_json(self.file_path, self.system)
 
     def presidentclear(self, settings):
@@ -86,7 +86,7 @@ class president:
                                                  "Candidates": {},
                                                  "Config": {"Election Started": "No",
                                                             "Cooldown": False, "Time Remaining": 0, "Default CD": 0,
-                                                            "Candidates": 0, "Wait Time": 120},
+                                                            "NumOfCandidates": 0, "Wait Time": 120},
                                                  }
             dataIO.save_json(self.file_path, self.system)
             print("Creating default heist settings for Server: {}".format(server.name))
