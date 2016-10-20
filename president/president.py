@@ -71,13 +71,19 @@ class president:
         await self.bot.say("President has been reset.")
 
     #--INTERNAL ATTR DEFINITIONS
+    def presidentclear(self, settings):
+    	del settings["Candidates"]
+    	del settings["President"]
+    	settings["Candidates"] = {}
+    	settings["Config"]["Election Started"] = "No"
+    	settings["Config"]["Time Remaining"] = 0
+    	settings["Config"]["NumOfCandidates"] = 0
+    	settings["Config"]["Cooldown"] = False
+    	dataIO.save_json(self.file_path, self.system)
 
     def candidates_add(self, uid, name, settings):
         settings["Candidates"][uid] = {"Name": name, "User ID": uid}
         settings["Config"]["NumOfCandidates"] = settings["Config"]["Candidates"] + 1
-        dataIO.save_json(self.file_path, self.system)
-
-    def presidentclear(self, settings):
         dataIO.save_json(self.file_path, self.system)
 
     def check_server_settings(self, server):
