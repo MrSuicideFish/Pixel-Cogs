@@ -89,7 +89,7 @@ class president:
                                                             "NumOfCandidates": 0, "Wait Time": 120},
                                                  }
             dataIO.save_json(self.file_path, self.system)
-            print("Creating default heist settings for Server: {}".format(server.name))
+            print("Creating default president settings for Server: {}".format(server.name))
             path = self.system["Servers"][server.id]
             return path
         else:
