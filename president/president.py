@@ -49,16 +49,16 @@ class president:
         settings = self.check_server_settings(server)
 
         # Check to be sure the nominated user even exists in the server
-        if len(ctx.message.mentions) > 0:
-            for mens in ctx.message.mentions:
-                if settings["Config"]["Election Started"] == "No":
-                    settings["Config"]["Election Started"] = "Yes"
-                    await self.bot.say("Election Has Been Started!")
+        # if len(ctx.message.mentions) > 0:
+        #     for mens in ctx.message.mentions:
+        #         if settings["Config"]["Election Started"] == "No":
+        #             settings["Config"]["Election Started"] = "Yes"
+        #             await self.bot.say("Election Has Been Started!")
 
-                mentionedUser = server.get_member_named(mens.nick)
-                if mentionedUser is not None:
-                    self.candidates_add( mentionedUser.id, mentionedUser.name, settings)
-                    await self.bot.say("Election Has Been Started, {0} has nominated {1}!".format(user.nick, mentionedUser.name))
+        #         mentionedUser = server.get_member_named(mens.nick)
+        #         if mentionedUser is not None:
+        #             self.candidates_add( mentionedUser.id, mentionedUser.name, settings)
+        #             await self.bot.say("Election Has Been Started, {0} has nominated {1}!".format(user.nick, mentionedUser.name))
 
                 # DEBUGGING
     @president.command(name="reset", pass_context=True)
@@ -73,7 +73,7 @@ class president:
     #--INTERNAL ATTR DEFINITIONS
     def presidentclear(self, settings):
     	del settings["Candidates"]
-    	del settings["President"]
+    	settings["President"] = "None"
     	settings["Candidates"] = {}
     	settings["Config"]["Election Started"] = "No"
     	settings["Config"]["Time Remaining"] = 0
@@ -88,7 +88,7 @@ class president:
 
     def check_server_settings(self, server):
         if server.id not in self.system["Servers"]:
-            self.system["Servers"][server.id] = {"President": {},
+            self.system["Servers"][server.id] = {"President": "None",
                                                  "Candidates": {},
                                                  "Config": {"Election Started": "No",
                                                             "Cooldown": False, "Time Remaining": 0, "Default CD": 0,
