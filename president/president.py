@@ -52,12 +52,14 @@ class president:
         if len(ctx.message.mentions) < 1:
             if nominatedUser is not "" or None:
                 nominatedMember = server.get_member(nominatedUser)
-                self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
+                await self.bot.say(nominatedMember)
+                # self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
             else:
                 await self.bot.say("Missing name.")
         else:
             nominatedMember = server.get_member(ctx.message.mentions[0]);
-            self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
+            await self.bot.say(nominatedMember)
+            # self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
 
                 # DEBUGGING
     @president.command(name="reset", pass_context=True)
