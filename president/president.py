@@ -51,7 +51,7 @@ class president:
 
         if len(ctx.message.mentions) < 1:
             if nominatedUser is not "" or None:
-                nominatedMember = server.get_member_by_name(nominatedUser)
+                nominatedMember = server.get_member_named(nominatedUser)
                 # self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
                 await self.bot.say(nominatedUser)
             else:
