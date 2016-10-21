@@ -42,6 +42,7 @@ class president:
     # we write pass_context so that discord will send us info about the server
     # that we can use
     @president.command(name="nominate", pass_context=True, mentions=True)
+    @checks.admin_or_permissions(manage_server=True)
     async def _nominate_president(self, ctx, nominatedUser: str):
         """Nominate a president for the server"""
 
@@ -95,6 +96,7 @@ class president:
     #DEBUG SHOWS INFO ABOUT CONFIG
     #Delete me after final
     @president.command(name="info", pass_context=True)
+    @checks.admin_or_permissions(manage_server=True)
     async def _info_president(self, ctx):
         """Shows President Config"""
 
