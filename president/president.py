@@ -57,9 +57,9 @@ class president:
             else:
                 await self.bot.say("Missing name.")
         else:
-            nominatedMember = server.get_member(ctx.message.mentions[0]);
+            nominatedMember = server.get_member(ctx.message.mentions[0].id);
             # self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
-            await self.bot.say(ctx.message.mentions[0].id)
+            await self.bot.say(nominatedMember)
 
                 # DEBUGGING
     @president.command(name="reset", pass_context=True)
