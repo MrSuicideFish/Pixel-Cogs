@@ -107,13 +107,7 @@ class president:
 
     #--INTERNAL ATTR DEFINITIONS
     def get_nominated_member(self, server, nominatedUser, mentions):
-        if nominatedUser is "" or None:
-            if len(mentions) > 0:
-                return server.get_member_named(mentions[0].name)
-            else:
-                return None
-        else:
-            return server.get_member_named(nominatedUser)
+    	await.self.bot.say(len(mentions))
 
     def has_duplicate_nominee(self, settings, memberName):
         for member in settings["Candidates"]:
