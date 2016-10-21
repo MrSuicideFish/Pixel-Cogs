@@ -59,7 +59,7 @@ class president:
                 settings["Config"]["Election Started"] = "Yes"
 
                 self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
-                self.bot.say("{0} nominated {1}".format(author, nominatedMember.nick))
+                self.bot.say("{0} nominated {1}".format(user, nominatedMember.nick))
 
                 #THIS IS WHERE THE MAGIC HAPPENS
                 wait = settings["Config"]["Wait Time"]
@@ -75,7 +75,7 @@ class president:
             else:
                 if has_duplicate_nominee(settings, nominatedMember.id) is not True:
                     self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
-                    self.bot.say("{0} nominated {1}".format(author, nominatedMember.nick))
+                    self.bot.say("{0} nominated {1}".format(user, nominatedMember.nick))
                 else:
                     self.bot.say("{0} is already nominated!".format(nominatedMember.nick))
         else:
