@@ -107,7 +107,11 @@ class president:
 
     #--INTERNAL ATTR DEFINITIONS
     def get_nominated_member(self, server, nominatedUser, mentions):
-    	print("{0}".format(len(mentions)))
+    	numOfMentions = len(mentions)
+    	if numOfMentions > 0:
+    		return server.get_member(mentions[0].id)
+		else:
+			return server.get_member_named(nominatedUser)
 
     def has_duplicate_nominee(self, settings, memberName):
         for member in settings["Candidates"]:
