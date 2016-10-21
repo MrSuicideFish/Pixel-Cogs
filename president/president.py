@@ -109,7 +109,7 @@ class president:
     def get_nominated_member(self, server, nominatedUser, mentions):
     	numOfMentions = len(mentions)
     	if numOfMentions > 0:
-    		return server.get_member(mentions[0].id)
+			return server.get_member(mentions[0].id)
 		else:
 			return server.get_member_named(nominatedUser)
 
