@@ -74,7 +74,7 @@ class president:
                 await asyncio.sleep(half_time)
                 await self.bot.say("{0} hour(s) until election is over".format( half_time))
             else:
-                if has_duplicate_nominee(settings, nominatedMember.id) is not True:
+                if self.has_duplicate_nominee(settings, nominatedMember.id) is not True:
                     self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
                     self.bot.say("{0} nominated {1}".format(user, nominatedMember.nick))
                 else:
