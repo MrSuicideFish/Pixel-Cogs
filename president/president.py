@@ -84,7 +84,7 @@ class president:
 
     def candidates_add(self, uid, name, settings):
         settings["Candidates"][uid] = {"Name": name, "User ID": uid}
-        settings["Config"]["NumOfCandidates"] = settings["Config"]["Candidates"] + 1
+        settings["Config"]["NumOfCandidates"] = settings["Config"]["NumOfCandidates"] + 1
         dataIO.save_json(self.file_path, self.system)
 
     def check_server_settings(self, server):
