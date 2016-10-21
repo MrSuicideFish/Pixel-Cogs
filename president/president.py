@@ -50,7 +50,7 @@ class president:
         settings = self.check_server_settings(server)
 
         #Get nominated member by either mention or name
-        nominatedMember = get_nominated_member(server, nominatedUser, ctx.message.mentions)
+        nominatedMember = self.get_nominated_member(server, nominatedUser, ctx.message.mentions)
 
         if nominatedMember is not None:
             if settings["Config"]["Election Started"] == "No":
