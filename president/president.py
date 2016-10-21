@@ -48,18 +48,25 @@ class president:
         user = ctx.message.author
         server = ctx.message.server
         settings = self.check_server_settings(server)
+        
+        await self.bot.say(ctx.message.mentions[0].name)
+        # nominatedMember = server.get_member_named(ctx.message.mentions[0].name)
 
-        if len(ctx.message.mentions) < 1:
-            if nominatedUser is not "" or None:
-                nominatedMember = server.get_member_named(nominatedUser)
-                self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
-                await self.bot.say(nominatedMember)
-            else:
-                await self.bot.say("Missing name.")
-        else:
-            nominatedMember = server.get_member(ctx.message.mentions[0].id);
-            self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
-            await self.bot.say(nominatedMember)
+        # if nominatedMember is not None:
+        #     self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
+
+
+        # if len(ctx.message.mentions) < 1:
+        #     if nominatedUser is not "" or None:
+        #         nominatedMember = server.get_member_named(nominatedUser)
+        #         self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
+        #         await self.bot.say(nominatedMember)
+        #     else:
+        #         await self.bot.say("Missing name.")
+        # else:
+        #     nominatedMember = server.get_member(ctx.message.mentions[0].id);
+        #     self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
+        #     await self.bot.say(nominatedMember)
 
                 # DEBUGGING
     @president.command(name="reset", pass_context=True)
@@ -72,16 +79,19 @@ class president:
         await self.bot.say("President has been reset.")
 
     #DEBUG SHOWS INFO ABOUT CONFIG
+    #Delete me after final
     @president.command(name="info", pass_context=True)
     async def _info_president(self, ctx):
         """Shows President Config"""
-        
+
         server = ctx.message.server
         settings = self.check_server_settings(server)
         await self.bot.say(settings)
 
 
     #--INTERNAL ATTR DEFINITIONS
+    def name_check(member)
+
     def presidentclear(self, settings):
     	del settings["Candidates"]
     	settings["President"] = "None"
