@@ -55,30 +55,30 @@ class president:
 
         if nominatedMember is not None:
             if settings["Config"]["Election Started"] == "No":
-                self.bot.say("Starting Election!")
+                await self.bot.say("Starting Election!")
                 self.presidentclear(settings)
                 settings["Config"]["Election Started"] = "Yes"
 
                 self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
-                self.bot.say("{0} nominated {1}".format(user, nominatedMember.nick))
+                await self.bot.say("{0} nominated {1}".format(user, nominatedMember.nick))
 
                 #THIS IS WHERE THE MAGIC HAPPENS
-                wait = settings["Config"]["Wait Time"]
-                wait_time = int(wait)
-                half_time = int(wait_time)
-                split_time = int(half_time / 2)
+                # wait = settings["Config"]["Wait Time"]
+                # wait_time = int(wait)
+                # half_time = int(wait_time)
+                # split_time = int(half_time / 2)
 
-                await self.bot.say("{0} hour(s) until election is over".format( wait ))
-                await asyncio.sleep(wait_time)
-                await self.bot.say("{0} hour(s) until election is over".format( waitTime))
-                await asyncio.sleep(half_time)
-                await self.bot.say("{0} hour(s) until election is over".format( half_time))
+                # await self.bot.say("{0} hour(s) until election is over".format( wait ))
+                # await asyncio.sleep(wait_time)
+                # await self.bot.say("{0} hour(s) until election is over".format( waitTime))
+                # await asyncio.sleep(half_time)
+                # await self.bot.say("{0} hour(s) until election is over".format( half_time))
             else:
                 if self.has_duplicate_nominee(settings, nominatedMember.id) is not True:
                     self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
-                    self.bot.say("{0} nominated {1}".format(user, nominatedMember.nick))
+                    await self.bot.say("{0} nominated {1}".format(user, nominatedMember.nick))
                 else:
-                    self.bot.say("{0} is already nominated!".format(nominatedMember.nick))
+                    await self.bot.say("{0} is already nominated!".format(nominatedMember.nick))
         else:
             await self.bot.say("Could not find user: {0}".format(nominatedUser))
 
