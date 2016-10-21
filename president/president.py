@@ -71,6 +71,16 @@ class president:
         self.presidentclear(settings)
         await self.bot.say("President has been reset.")
 
+    #DEBUG SHOWS INFO ABOUT CONFIG
+    @president.command(name="info", pass_context=True)
+    async def _info_president(self, ctx):
+        """Shows President Config"""
+        
+        server = ctx.message.server
+        settings = self.check_server_settings(server)
+        await self.bot.say(settings)
+
+
     #--INTERNAL ATTR DEFINITIONS
     def presidentclear(self, settings):
     	del settings["Candidates"]
