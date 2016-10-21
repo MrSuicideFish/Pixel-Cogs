@@ -53,7 +53,7 @@ class president:
         nominatedMember = get_nominated_member(server, nominatedUser, ctx.message.mentions)
 
         if nominatedMember is not None:
-            if settings["Config"]["Election Started"] == "No"
+            if settings["Config"]["Election Started"] is "No"
                 self.bot.say("Starting Election!")
                 self.presidentclear(settings)
                 settings["Config"]["Election Started"] = "Yes"
@@ -66,9 +66,12 @@ class president:
                 wait_time = int(wait)
                 half_time = int(wait_time)
                 split_time = int(half_time / 2)
-                await self.bot.say("{0} hour(s) until election is over".format( waitTime))
+
+                await self.bot.say("{0} hour(s) until election is over".format( wait ))
                 await asyncio.sleep(wait_time)
                 await self.bot.say("{0} hour(s) until election is over".format( waitTime))
+                await asyncio.sleep(half_time)
+                await self.bot.say("{0} hour(s) until election is over".format( half_time))
             else:
                 if has_duplicate_nominee(settings, nominatedMember.id) is not True:
                     self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
