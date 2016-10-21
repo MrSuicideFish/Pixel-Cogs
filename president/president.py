@@ -107,8 +107,7 @@ class president:
 
     #--INTERNAL ATTR DEFINITIONS
     def get_nominated_member(self, server, nominatedUser, mentions):
-    	numOfMentions = len(mentions)
-    	await self.bot.say(numOfMentions)
+    	print("{0}".format(mentions))
 
     def has_duplicate_nominee(self, settings, memberName):
         for member in settings["Candidates"]:
