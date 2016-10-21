@@ -48,25 +48,36 @@ class president:
         user = ctx.message.author
         server = ctx.message.server
         settings = self.check_server_settings(server)
-        
-        await self.bot.say(ctx.message.mentions[0].name)
-        # nominatedMember = server.get_member_named(ctx.message.mentions[0].name)
 
-        # if nominatedMember is not None:
-        #     self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
+        #Get nominated member by either mention or name
+        nominatedMember = get_nominated_member(server, nominatedUser, ctx.message.mentions)
 
+        if nominatedMember is not None:
+            if settings["Config"]["Election Started"] == "No"
+                self.bot.say("Starting Election!")
+                self.presidentclear(settings)
+                settings["Config"]["Election Started"] = "Yes"
 
-        # if len(ctx.message.mentions) < 1:
-        #     if nominatedUser is not "" or None:
-        #         nominatedMember = server.get_member_named(nominatedUser)
-        #         self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
-        #         await self.bot.say(nominatedMember)
-        #     else:
-        #         await self.bot.say("Missing name.")
-        # else:
-        #     nominatedMember = server.get_member(ctx.message.mentions[0].id);
-        #     self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
-        #     await self.bot.say(nominatedMember)
+                self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
+                self.bot.say("{0} nominated {1}".format(author, nominatedMember.nick))
+
+                #THIS IS WHERE THE MAGIC HAPPENS
+                wait = settings["Config"]["Wait Time"]
+                wait_time = int(wait)
+                half_time = int(wait_time)
+                split_time = int(half_time / 2)
+                await self.bot.say("{0} hour(s) until election is over".format( waitTime))
+                await asyncio.sleep(wait_time)
+                await self.bot.say("{0} hour(s) until election is over".format( waitTime))
+            else:
+                if has_duplicate_nominee(settings, nominatedMember.id) is not True:
+                    self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
+                    self.bot.say("{0} nominated {1}".format(author, nominatedMember.nick))
+                else:
+                    self.bot.say("{0} is already nominated!".format(nominatedMember.nick))
+        else:
+            await self.bot.say("Could not find user: {0}".format(nominatedUser))
+
 
                 # DEBUGGING
     @president.command(name="reset", pass_context=True)
@@ -90,7 +101,19 @@ class president:
 
 
     #--INTERNAL ATTR DEFINITIONS
-    # def name_check(member)
+    def get_nominated_member(self, server, nominatedUser, mentions):
+        if nominatedUser is "" or None:
+            if len(mentions) > 0:
+                return server.get_member_named(mentions[0].name)
+            else:
+                return None
+        else:
+            return server.get_member_named(nominatedUser)
+
+    def has_duplicate_nominee(self, settings, memberName):
+        for member in settings["Candidates"]:
+            if member is memberName:
+                return True
 
     def presidentclear(self, settings):
     	del settings["Candidates"]
