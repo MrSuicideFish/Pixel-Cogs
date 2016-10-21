@@ -49,19 +49,15 @@ class president:
         server = ctx.message.server
         settings = self.check_server_settings(server)
 
-        await self.bot.say(settings);
-
-        # Check to be sure the nominated user even exists in the server
-        # if len(ctx.message.mentions) > 0:
-        #     for mens in ctx.message.mentions:
-        #         if settings["Config"]["Election Started"] == "No":
-        #             settings["Config"]["Election Started"] = "Yes"
-        #             await self.bot.say("Election Has Been Started!")
-
-        #         mentionedUser = server.get_member_named(mens.nick)
-        #         if mentionedUser is not None:
-        #             self.candidates_add( mentionedUser.id, mentionedUser.name, settings)
-        #             await self.bot.say("Election Has Been Started, {0} has nominated {1}!".format(user.nick, mentionedUser.name))
+        if len(ctx.message.mentions) < 1:
+            if nominatedUser is not "" or None:
+                nominatedMember = server.get_member(nominatedUser)
+                self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
+            else:
+                await self.bot.say("Missing name.")
+        else:
+            nominatedMember = server.get_member(ctx.message.mentions[0]);
+            self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
 
                 # DEBUGGING
     @president.command(name="reset", pass_context=True)
