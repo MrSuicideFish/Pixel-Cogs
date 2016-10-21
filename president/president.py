@@ -54,14 +54,13 @@ class president:
         nominatedMember = self.get_nominated_member(server, nominatedUser, ctx.message.mentions)
 
         if nominatedMember is not None:
-        	targetUser = server.get_user_info(nominatedMember.id)
             if settings["Config"]["Election Started"] == "No":
                 await self.bot.say("Starting Election!")
                 self.presidentclear(settings)
                 settings["Config"]["Election Started"] = "Yes"
 
                 self.candidates_add(nominatedMember.id, nominatedMember.nick, settings)
-                await self.bot.say("{0} nominated {1}".format(user, targetUser.name))
+                await self.bot.say("{0} nominated {1}".format(user, server.get_user_info(nominatedMember.id).name))
 
                 #THIS IS WHERE THE MAGIC HAPPENS
                 # wait = settings["Config"]["Wait Time"]
