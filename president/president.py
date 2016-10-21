@@ -90,7 +90,7 @@ class president:
 
 
     #--INTERNAL ATTR DEFINITIONS
-    def name_check(member)
+    # def name_check(member)
 
     def presidentclear(self, settings):
     	del settings["Candidates"]
