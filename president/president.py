@@ -53,7 +53,7 @@ class president:
         nominatedMember = get_nominated_member(server, nominatedUser, ctx.message.mentions)
 
         if nominatedMember is not None:
-            if settings["Config"]["Election Started"] == "No"
+            if settings["Config"]["Election Started"] == "No":
                 self.bot.say("Starting Election!")
                 self.presidentclear(settings)
                 settings["Config"]["Election Started"] = "Yes"
