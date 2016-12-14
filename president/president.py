@@ -59,9 +59,9 @@ class president:
             time_remaining = self.time_formatting(seconds)
             await self.bot.say("A president was just nominated, another campaign cannot be started for {}".format(time_remaining))
         elif settings["Config"]["Election Started"] == "Yes":
-            self.candidates_add(user.id, settings, server)
+            self.candidates_add(user.id, server)
         elif settings["Config"]["Election Started"] == "No":
-            self.candidates_add(user.id, settings, server)
+            self.candidates_add(user.id, server)
 
     @president.command(name="info", pass_context=True)
     async def _info_president(self, ctx):
