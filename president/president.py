@@ -48,6 +48,13 @@ class president:
         server = ctx.message.server
         settings = self.check_server_settings(server)
 
+    @president.command(name="info")
+    async def _info_president(self, ctx):
+        """"Shows presidential race information""""
+        server = ctx.message.server
+        settings = self.check_server_settings(server)
+        await self.bot.say(settings["Config"]);
+
         # DEBUGGING
     @president.command(name="reset", pass_context=True)
     @checks.admin_or_permissions(manage_server=True)
