@@ -40,13 +40,28 @@ class president:
     #--Create the 'nominate' command
     # we write pass_context so that discord will send us info about the server
     # that we can use
-    @president.command(name="nominate", pass_context=True, mentions=True)
-    async def _nominate_president(self, ctx, nominatedUser: str):
+    @president.command( name="nominate", pass_context=True )
+    async def _nominate_president(self, ctx):
         """Nominate a president for the server"""
 
         user = ctx.message.author
         server = ctx.message.server
         settings = self.check_server_settings(server)
+
+        wait = settings["Config"]["Wait Time"]
+        if not self.account_check(user):
+            await self.bot.say("You need a bank account to pay for your campaign")
+        elif not self.enough_points(user):
+            await self.bot.say("You doing have enough cash to cover the cost of your campaign")
+        elif not self.check_cooldowns(settings):
+            s = abs(settings["Config"]["Time Remaining"])
+            seconds = abs(s - settings["Config"]["Default CD"])
+            time_remaining = self.time_formatting(seconds)
+            await self.bot.say("A president was just nominated, another campaign cannot be started for {}".format(time_remaining))
+        elif settings["Config"]["Election Started"] == "Yes":
+            self.candidates_add(user, settings, server)
+        elif settings["Config"]["Election Started"] == "No":
+            self.candidates_add(user, settings, server)
 
     @president.command(name="info", pass_context=True)
     async def _info_president(self, ctx):
@@ -56,7 +71,7 @@ class president:
         settings = self.check_server_settings(server)
         await self.bot.say(settings["Config"])
 
-        # DEBUGGING
+    # DEBUGGING
     @president.command(name="reset", pass_context=True)
     @checks.admin_or_permissions(manage_server=True)
     async def _reset_president(self, ctx):
@@ -68,18 +83,46 @@ class president:
 
     #--INTERNAL ATTR DEFINITIONS
 
-    def candidates_add(self, uid, name, settings):
-        settings["Candidates"][uid] = {"Name": name, "User ID": uid}
+    def candidates_add(self, uid, settings, server):
+        settings["Candidates"].append({"Name": server.get_member(uid).nick, "User ID": uid})
         settings["Config"]["Candidates"] = settings["Config"]["Candidates"] + 1
         dataIO.save_json(self.file_path, self.system)
 
     def presidentclear(self, settings):
         dataIO.save_json(self.file_path, self.system)
 
+    def account_check(self,uid):
+        bank = self.bot.get_cog('Economy').bank
+        if bank.account_exists(uid):
+            return True
+        else:
+            return False
+
+    def time_formatting(self, seconds):
+        m, s = divmod(seconds, 60)
+        h, m = divmod(m, 60)
+        if h > 0:
+            msg = "```{} hours, {} minutes and {} seconds remaining```".format(h, m, s)
+        elif h == 0 and m > 0:
+            msg = "{} minutes, {} seconds remaining".format(m, s)
+        elif m == 0 and h == 0 and s > 0:
+            msg = "{} seconds remaining".format(s)
+        return msg
+
+    def check_cooldowns(self, settings):
+        if settings["Config"]["Cooldown"] is False:
+            return True
+        elif abs(settings["Config"]["Time Remaining"] - int(time.perf_counter())) >= settings["Config"]["Default CD"]:
+            return True
+        elif settings["Config"]["Time Remaining"] == 0:
+            return True
+        else:
+            return False
+
     def check_server_settings(self, server):
         if server.id not in self.system["Servers"]:
             self.system["Servers"][server.id] = {"President": {},
-                                                 "Candidates": {},
+                                                 "Candidates": [],
                                                  "Config": {"Election Started": "No",
                                                             "Cooldown": False, "Time Remaining": 0, "Default CD": 0,
                                                             "Candidates": 0, "Wait Time": 120},
