@@ -98,6 +98,18 @@ class president:
         else:
             return False
 
+    def enough_points(self, uid, server):
+        amount = 0
+        bank = self.bot.get_cog('Economy').bank
+        mobj = server.get_member(uid)
+        if self.account_check(mobj):
+            if bank.can_spend(mobj, amount):
+                return True
+            else:
+                return False
+        else:
+            return False
+
     def time_formatting(self, seconds):
         m, s = divmod(seconds, 60)
         h, m = divmod(m, 60)
@@ -118,6 +130,7 @@ class president:
             return True
         else:
             return False
+
 
     def check_server_settings(self, server):
         if server.id not in self.system["Servers"]:
