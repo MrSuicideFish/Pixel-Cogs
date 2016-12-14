@@ -84,7 +84,7 @@ class president:
     #--INTERNAL ATTR DEFINITIONS
 
     def candidates_add(self, uid, settings, server):
-        settings["Candidates"].append({"Name": server.get_member(uid).nick, "User ID": uid})
+        settings["Candidates"][uid] = {"Name": server.get_member(uid).nick, "User ID": uid}
         settings["Config"]["Candidates"] = settings["Config"]["Candidates"] + 1
         dataIO.save_json(self.file_path, self.system)
 
