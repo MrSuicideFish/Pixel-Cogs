@@ -59,9 +59,9 @@ class president:
             time_remaining = self.time_formatting(seconds)
             await self.bot.say("A president was just nominated, another campaign cannot be started for {}".format(time_remaining))
         elif settings["Config"]["Election Started"] == "Yes":
-            self.candidates_add(user, settings, server)
+            self.candidates_add(user.id, settings, server)
         elif settings["Config"]["Election Started"] == "No":
-            self.candidates_add(user, settings, server)
+            self.candidates_add(user.id, settings, server)
 
     @president.command(name="info", pass_context=True)
     async def _info_president(self, ctx):
@@ -83,8 +83,10 @@ class president:
 
     #--INTERNAL ATTR DEFINITIONS
 
-    def candidates_add(self, uid, settings, server):
-        settings["Candidates"][uid] = {"Name": server.get_member(uid).nick, "User ID": uid}
+    def candidates_add(self, uid, server):
+        member = server.get_member(uid)
+        settings = self.check_server_settings(server)
+        settings["Candidates"][uid] = {"Name": member.nick, "User ID": uid}
         settings["Config"]["Candidates"] = settings["Config"]["Candidates"] + 1
         dataIO.save_json(self.file_path, self.system)
 
