@@ -48,7 +48,7 @@ class president:
         server = ctx.message.server
         settings = self.check_server_settings(server)
 
-    @president.command(name="info")
+    @president.command(name="info", pass_context=True)
     async def _info_president(self, ctx):
         """Shows presidential race information"""
 
