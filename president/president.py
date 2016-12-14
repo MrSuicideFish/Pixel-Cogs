@@ -51,7 +51,7 @@ class president:
         wait = settings["Config"]["Wait Time"]
         if not self.account_check(user):
             await self.bot.say("You need a bank account to pay for your campaign")
-        elif not self.enough_points(user):
+        elif not self.enough_points(user, server):
             await self.bot.say("You doing have enough cash to cover the cost of your campaign")
         elif not self.check_cooldowns(settings):
             s = abs(settings["Config"]["Time Remaining"])
