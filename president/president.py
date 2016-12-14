@@ -51,7 +51,7 @@ class president:
         wait = settings["Config"]["Wait Time"]
         if not self.account_check(user):
             await self.bot.say("You need a bank account to pay for your campaign")
-        elif not self.enough_points(user, server):
+        elif not self.enough_points(user.id, server):
             await self.bot.say("You doing have enough cash to cover the cost of your campaign")
         elif not self.check_cooldowns(settings):
             s = abs(settings["Config"]["Time Remaining"])
@@ -91,7 +91,7 @@ class president:
     def presidentclear(self, settings):
         dataIO.save_json(self.file_path, self.system)
 
-    def account_check(self,uid):
+    def account_check(self, uid):
         bank = self.bot.get_cog('Economy').bank
         if bank.account_exists(uid):
             return True
