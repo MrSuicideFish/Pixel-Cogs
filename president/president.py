@@ -59,8 +59,11 @@ class president:
             time_remaining = self.time_formatting(seconds)
             await self.bot.say("A president was just nominated, another campaign cannot be started for {}".format(time_remaining))
         elif settings["Config"]["Election Started"] == "Yes":
+            #election had already started, add user to candidates
             self.candidates_add(user.id, server)
         elif settings["Config"]["Election Started"] == "No":
+            #election not started yet, add the user to candidates
+            #start the election countdown
             self.candidates_add(user.id, server)
 
     @president.command(name="info", pass_context=True)
@@ -91,6 +94,7 @@ class president:
         dataIO.save_json(self.file_path, self.system)
 
     def presidentclear(self, settings):
+        settings["Config"].clear()
         dataIO.save_json(self.file_path, self.system)
 
     def account_check(self, uid):
